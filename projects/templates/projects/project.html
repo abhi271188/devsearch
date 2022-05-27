@@ -1,6 +1,7 @@
 {% extends 'main.html' %}
 {% block content %}
 <div>
+    <img style="max-width: 450px;" src="{{project.featured_image.url}}">
     <h3>{{project.title}}</h3>
     {% for tag in tags %}
         <small style="border: 1px solid black;">{{tag.name}}</small>
