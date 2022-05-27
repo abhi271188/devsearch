@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block content %}
+<div>
+    <h2>Projects</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Totel Vote</th>
+            <th>Vote Ratio</th>
+            <th>Created</th>
+        </tr>
+        {% for project in projects %}
+        <tr>
+                <td>{{project.id}}</td>
+                <td>{{project.title}}</td>
+                <td>{{project.total_vote}}</td>
+                <td>{{project.vote_ratio}}</td>
+                <td>{{project.created}}</td>
+                <td><a href="{% url 'project' project.id %}">View</a></td>
+                <td><a href="{% url 'update-project' project.id %}">Edit</a></td>
+                <td><a href="{% url 'delete-project' project.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}
