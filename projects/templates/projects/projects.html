@@ -36,7 +36,7 @@
                         <p><a class="project__author" href="">By Dennis Ivanov</a></p>
                         <p class="project--rating">
                         <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Postitive
-                        Feedback ({{project.total_vote}} Votes)
+                        Feedback ({{project.total_vote}} Vote{{project.total_vote|pluralize:"s"}})
                         </p>
                     <div class="project__tags">
                         {% for tag in project.tag.all %}
