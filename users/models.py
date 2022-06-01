@@ -13,6 +13,7 @@ class Profile(models.Model):
     blank=True, null=True, upload_to='profiles/')
     short_intro = models.CharField(max_length=200, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
+    location = models.CharField(max_length=200, null=True, blank=True)
     social_github = models.CharField(max_length=200, blank=True, null=True)
     social_twitter = models.CharField(max_length=200, blank=True, null=True)
     social_linkedin = models.CharField(max_length=200, blank=True, null=True)
