@@ -1,8 +1,10 @@
 from email.policy import default
 from django.db import models
+from users.models import Profile
 import uuid
 
 class Project(models.Model):
+    owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     featured_image = models.ImageField(default = 'default.jpg', null=True, blank = True)
