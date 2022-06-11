@@ -70,57 +70,22 @@
             </div>
   
             <table class="settings__table">
+              {% for project in projects %}
               <tr>
                 <td class="settings__thumbnail">
-                  <a href="single-project.html"><img src="images/project-a.png" alt="Project Thumbnail" /></a>
+                  <a href=""><img src="{{project.featured_image.url}}" alt="Project Thumbnail" /></a>
                 </td>
                 <td class="settings__tableInfo">
-                  <a href="single-project.html">Yoga Studio Landing Page</a>
-                  <p>
-                    Consectetur adipisicing elit. Natus nam dolore aut sed vitae eos architecto unde tempore
-                    exercitationem fugiat?...
-                  </p>
+                  <a href="single-project.html">{{project.name}}</a>
+                  <p>{{project.description|slice:"200"}}</p>
                 </td>
                 <td class="settings__tableActions">
-                  <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                  <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
+                  <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-project' project.id %}"><i class="im im-edit"></i> Edit</a>
+                  <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-project' project.id %}"><i class="im im-x-mark-circle-o"></i>
                     Delete</a>
                 </td>
               </tr>
-              <tr>
-                <td class="settings__thumbnail">
-                  <a href="single-project.html"><img src="images/project-b.png" alt="Project Thumbnail" /></a>
-                </td>
-                <td class="settings__tableInfo">
-                  <a href="single-project.html">DevSearch Website UI Design</a>
-                  <p>
-                    Consectetur adipisicing elit. Natus nam dolore aut sed vitae eos architecto unde tempore
-                    exercitationem fugiat?...
-                  </p>
-                </td>
-                <td class="settings__tableActions">
-                  <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                  <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                    Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="settings__thumbnail">
-                  <a href="single-project.html"><img src="images/project-a.png" alt="Project Thumbnail" /></a>
-                </td>
-                <td class="settings__tableInfo">
-                  <a href="single-project.html">Portfolio Website Design</a>
-                  <p>
-                    Consectetur adipisicing elit. Natus nam dolore aut sed vitae eos architecto unde tempore
-                    exercitationem fugiat?...
-                  </p>
-                </td>
-                <td class="settings__tableActions">
-                  <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                  <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                    Delete</a>
-                </td>
-              </tr>
+              {% endfor %}
             </table>
           </div>
         </div>

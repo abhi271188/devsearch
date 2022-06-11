@@ -13,7 +13,9 @@ def userProfile(request, pk):
     top_skills = profile.skill_set.exclude(description__exact = '')
     # the below code filter those skills that doesn't have any description in a specific profile.
     other_skills = profile.skill_set.filter(description = '')
-    context = {'profile' : profile, 'top_skills' : top_skills, 'other_skills' : other_skills}
+    projects = profile.project_set.all()
+    context = {'profile' : profile, 'top_skills' : top_skills, 'other_skills' : other_skills, 
+    'projects' : projects}
     return render(request, 'users/profile.html', context)
 
 
