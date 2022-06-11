@@ -44,27 +44,25 @@
               <h3 class="devInfo__title">About Me</h3>
               <p class="devInfo__about">{{profile.bio}}</p>
             </div>
-            <div class="settings">
-              <h3 class="settings__title">Skills</h3>
-              <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Skill</a>
+            <div class="devInfo">
+              <h3 class="devInfo__title">Skills</h3>
+              {% for skill in top_skills %}
+              <div class="devInfo__skills">
+                <div class="devSkill">
+                  <h4 class="devSkill__title">{{skill.name}}</h4>
+                  <p class="devSkill__info">{{skill.description}}</p>
+                </div>
+                {% endfor %}
+                <h3 class="devInfo__subtitle">Other Skills</h3>
+                <div class="devInfo__otherSkills">
+                  {% for skill in other_skills %}
+                  <span class="tag tag--pill tag--sub tag--lg">
+                    <small>{{skill.name}}</small>
+                  </span>
+                  {% endfor %}
+                </div>
+              </div>
             </div>
-  
-            <table class="settings__table">
-              <!--we can access the specific skills with respect to profile -->
-                {% for skill in profile.skill_set.all %}
-              <tr>
-                <td class="settings__tableInfo">
-                  <h4>{{skill.name}}</h4>
-                  <p>{{skill.description}}</p>
-                </td>
-                <td class="settings__tableActions">
-                  <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                  <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                    Delete</a>
-                </td>
-              </tr>
-              {% endfor %}
-            </table>
   
             <div class="settings">
               <h3 class="settings__title">Projects</h3>
