@@ -21,7 +21,7 @@ post_delete.connect(deleteUser, sender=Profile)
 def createProfile(sender, instance, created, **kwargs):
     if created:
         user = instance
-        profile = Profile.objects.get(
+        profile = Profile.objects.create(
             user = user,
             username = user.username,
             email = user.email,
