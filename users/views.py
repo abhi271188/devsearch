@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 from .models import Profile, Skill
 
@@ -17,5 +18,9 @@ def userProfile(request, pk):
     context = {'profile' : profile, 'top_skills' : top_skills, 'other_skills' : other_skills, 
     'projects' : projects}
     return render(request, 'users/profile.html', context)
+
+def userLogin(request):
+    context = {}
+    return render(request, 'users/login_register.html', context)
 
 
