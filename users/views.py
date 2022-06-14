@@ -23,8 +23,8 @@ def userProfile(request, pk):
 
 def userLogin(request):
     if request.method == 'POST':
-        username = request.POST[username]
-        password = request.POST[password]
+        username = request.POST['username']
+        password = request.POST['password']
         try:
             user = User.objects.get(username = username)
         except:
