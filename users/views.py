@@ -4,6 +4,24 @@ from .models import Profile, Skill
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 
+def userLogin(request):
+    if request.method == 'POST':
+        #print(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        try:
+            user = User.objects.get(username = username)
+        except:
+            print('Username does not exist')
+        user = authenticate(request, username = username, password = password)
+        if user is not None:
+            login(request, user)
+            return redirect('profiles')
+        else:
+            print('Username/Password does not exist')
+    context = {}
+    return render(request, 'users/login_register.html', context)
+
 def Profiles(request):
     profiles = Profile.objects.all()
     skills = Skill.objects.all()
@@ -21,21 +39,6 @@ def userProfile(request, pk):
     'projects' : projects}
     return render(request, 'users/profile.html', context)
 
-def userLogin(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        try:
-            user = User.objects.get(username = username)
-        except:
-            print('Username does not exist')
-        user = authenticate(request, username = username, password = password)
-        if user is not None:
-            login(request, user)
-            return redirect('profiles')
-        else:
-            print('Username/Password does not exist')
-    context = {}
-    return render(request, 'users/login_register.html', context)
+
 
 
