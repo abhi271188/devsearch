@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def userLogin(request):
+    page = 'login'
     if request.user.is_authenticated:
         return redirect('profiles')
 
@@ -24,12 +25,17 @@ def userLogin(request):
             return redirect('profiles')
         else:
             print('Username/Password does not exist')
-    context = {}
+    context = {'page' : page}
     return render(request, 'users/login_register.html', context)
 
 def userLogout(request):
     logout(request)
     return redirect('profiles')
+
+def userRegister(request):
+    page = 'register'
+    context = {'page' : page}
+    return render(request, 'users/login_register.html', context)
 
 def Profiles(request):
     profiles = Profile.objects.all()
