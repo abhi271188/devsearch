@@ -4,7 +4,8 @@ from .models import Profile, Skill
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import UserCreationForm
+from .forms import customUserCreationForm
 
 
 def userLogin(request):
@@ -35,9 +36,9 @@ def userLogout(request):
 
 def userRegister(request):
     page = 'register'
-    form = UserCreationForm()
+    form = customUserCreationForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = customUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             form.save()
