@@ -11,6 +11,11 @@
     </form>
 {% else %}
     <h1>User Registration</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit">
+    </form>
     <p>Already have account?<a href="{% url 'login-register' %}">SignIn</a></p>
 {% endif %}
 {% endblock content %}

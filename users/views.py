@@ -4,6 +4,7 @@ from .models import Profile, Skill
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 
 def userLogin(request):
@@ -34,7 +35,15 @@ def userLogout(request):
 
 def userRegister(request):
     page = 'register'
-    context = {'page' : page}
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            form.save()
+            login(request, user)
+            return redirect('profiles')
+    context = {'page' : page, 'form' : form}
     return render(request, 'users/login_register.html', context)
 
 def Profiles(request):
