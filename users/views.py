@@ -2,9 +2,14 @@ from multiprocessing import context
 from django.shortcuts import redirect, render
 from .models import Profile, Skill
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+
 
 def userLogin(request):
+    if request.user.is_authenticated:
+        return redirect('profiles')
+
     if request.method == 'POST':
         #print(request.POST)
         username = request.POST['username']
@@ -21,6 +26,10 @@ def userLogin(request):
             print('Username/Password does not exist')
     context = {}
     return render(request, 'users/login_register.html', context)
+
+def userLogout(request):
+    logout(request)
+    return redirect('profiles')
 
 def Profiles(request):
     profiles = Profile.objects.all()
