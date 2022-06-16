@@ -64,6 +64,10 @@ def userProfile(request, pk):
     'projects' : projects}
     return render(request, 'users/profile.html', context)
 
+def userAccount(request):
+    context = {}
+    return render(request, 'users/account.html', context)
+
 
 
 
