@@ -98,5 +98,10 @@ def addSkill(request):
 
     context = {'form' : form}
     return render(request, 'users/skill_form.html', context)
+
+@login_required(login_url='login-register')
+def updateSkill(request):
+    context = {}
+    return render(request, 'users/skill_form.html', context)
     
 
