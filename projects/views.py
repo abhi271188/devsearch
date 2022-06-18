@@ -54,5 +54,7 @@ def deleteProject(request, pk):
     context = {'obj' : project}
     return render(request, 'projects/delete.html', context)
 
+    
+
 
 

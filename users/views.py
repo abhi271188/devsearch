@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm
-from .forms import customUserCreationForm, ProfileForm
+from .forms import customUserCreationForm, ProfileForm, SkillForm
 
 
 def userLogin(request):
@@ -84,6 +84,19 @@ def updateProfile(request):
     context = {'form' : form}
     return render(request, 'users/profile_form.html', context)
 
+@login_required(login_url='login-register')
+def addSkill(request):
+    profile = request.user.profile
+    form = SkillForm()
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+        if form.is_valid():
+            skill = form.save(commit=False)
+            skill.owner = profile
+            form.save()
+            return redirect('account')
 
-
+    context = {'form' : form}
+    return render(request, 'users/skill_form.html', context)
+    
 
