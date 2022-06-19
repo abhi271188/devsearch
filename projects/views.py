@@ -52,7 +52,7 @@ def deleteProject(request, pk):
         project.delete()
         return redirect('projects')
     context = {'obj' : project}
-    return render(request, 'projects/delete.html', context)
+    return render(request, 'delete.html', context)
 
     
 
