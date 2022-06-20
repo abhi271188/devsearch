@@ -1,12 +1,15 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect
-from .models import Project
+from .models import Project, Tags
 from .forms import ProjectForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from users.models import Profile
+from .utils import searchProjects
 
 def projects(request):
-    projects = Project.objects.all()
-    context = {'projects' : projects}
+    search_query, projects = searchProjects(request)
+    context = {'projects' : projects, 'search_query' : search_query}
     return render(request, 'projects/projects.html', context)
 
 def project(request, pk):
