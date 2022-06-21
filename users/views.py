@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import customUserCreationForm, ProfileForm, SkillForm
 from django.db.models import Q
 from .utils import searchProfiles
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def userLogin(request):
@@ -51,8 +52,20 @@ def userRegister(request):
 
 def Profiles(request):
     skills, profiles, search_query = searchProfiles(request)
-    
-    context = {'profiles' : profiles, 'skills' : skills, 'search_query' : search_query}
+    page = request.GET.get('page')
+    result = 3
+    paginator = Paginator(profiles, result)
+    try:
+        profiles = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        profiles = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        profiles = paginator.page(page)
+
+    context = {'profiles' : profiles, 'skills' : skills, 'search_query' : search_query, 
+    'paginator' : paginator}
     return render(request, 'users/profiles.html', context)
 
 def userProfile(request, pk):
