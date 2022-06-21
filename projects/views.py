@@ -6,9 +6,14 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from users.models import Profile
 from .utils import searchProjects
+from django.core.paginator import Paginator
 
 def projects(request):
     search_query, projects = searchProjects(request)
+    page = 1
+    result = 3
+    paginator = Paginator(projects, result)
+    projects = paginator.page(page)
     context = {'projects' : projects, 'search_query' : search_query}
     return render(request, 'projects/projects.html', context)
 
