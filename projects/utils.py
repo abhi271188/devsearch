@@ -22,7 +22,6 @@ def searchProjects(request):
 
 def paginateProjects(request, projects, result):
     page = request.GET.get('page')
-    result = 3  
     paginator = Paginator(projects, result)
     try:
         projects = paginator.page(page)
