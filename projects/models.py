@@ -1,4 +1,5 @@
 from email.policy import default
+from tkinter import CASCADE
 from django.db import models
 from users.models import Profile
 import uuid
@@ -27,6 +28,7 @@ class Reviews(models.Model):
         ('up', 'upVote'),
         ('down', 'downVote'),
     )
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     body = models.TextField()
     value = models.CharField(max_length=20, choices=VOTE_TYPE)
