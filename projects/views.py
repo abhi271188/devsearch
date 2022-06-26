@@ -21,6 +21,14 @@ def project(request, pk):
     tags = project.tag.all()
     form = ReviewForm()
     reviews = Reviews.objects.all()
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        review = form.save(commit=False)
+        review.project = project
+        review.owner = request.user.profile
+        form.save()
+        return redirect('project', pk=project.id)
+
     context = {'project' : project, 'tags' : tags, 'form' : form, 'reviews' : reviews}
     return render(request, 'projects/project.html', context)
 
