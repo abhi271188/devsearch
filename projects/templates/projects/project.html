@@ -31,12 +31,12 @@
                 {{project.vote_ratio}}% Postitive Feedback ({{project.total_vote}} Vote{{project.total_vote|pluralize:"s"}})
               </h5>
   
-              <form class="form" action="#" method="POST">
+              <form class="form" action="" method="POST">
+                {% csrf_token %}
                 <!-- Textarea -->
                 <div class="form__field">
-                  <label for="formInput#textarea">Comments: </label>
-                  <textarea class="input input--textarea" name="message" id="formInput#textarea"
-                    placeholder="Write your comments here..."></textarea>
+                  <label for="formInput#textarea">{{form.label}}</label>
+                  {{form}}
                 </div>
                 <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
               </form>
