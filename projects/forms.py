@@ -4,7 +4,6 @@ from pyexpat import model
 from tkinter import Widget
 from django import forms
 from django.forms import ModelForm
-from django import forms
 from .models import Project, Reviews
 
 class ProjectForm(ModelForm):
@@ -32,16 +31,15 @@ class ProjectForm(ModelForm):
 class ReviewForm(ModelForm):
     class Meta:
         model = Reviews
-        fields = ['body', 'value']
-
-        label = {
-            'body' : 'Add a comment with your vote ',
-            'value' : 'Plave your vote',
+        fields = ['value', 'body']
+        labels = {
+            'value':'Place your vote',
+            'body':'Add a comment with your vote '
         }
     
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
-        
+
         for name, field in self.fields.items():
             field.widget.attrs.update({'class' : 'input'})
 

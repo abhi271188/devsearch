@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect
-from .models import Project, Tags
+from .models import Project, Reviews, Tags
 from .forms import ProjectForm, ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -20,7 +20,8 @@ def project(request, pk):
     project = Project.objects.get(id = pk)
     tags = project.tag.all()
     form = ReviewForm()
-    context = {'project' : project, 'tags' : tags, 'form' : form}
+    reviews = Reviews.objects.all()
+    context = {'project' : project, 'tags' : tags, 'form' : form, 'reviews' : reviews}
     return render(request, 'projects/project.html', context)
 
 @login_required(login_url='login-register')
