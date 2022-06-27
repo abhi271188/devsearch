@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import redirect, render
-from .models import Profile, Skill
+from .models import Profile, Skill, Message
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -128,5 +128,13 @@ def deleteSkill(request, pk):
         
     context = {'obj' : skill}
     return render(request, 'delete.html', context)
+
+@login_required(login_url='login-register')
+def userInbox(request):
+    profile = request.user.profile
+    messageRequests = profile.messages.all()
+    messageCount = messageRequests.filter(is_read = False).count()
+    context = {'messageRequests' : messageRequests, 'messageCount' : messageCount}
+    return render(request, 'users/inbox.html', context)
     
 
