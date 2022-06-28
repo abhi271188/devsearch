@@ -137,8 +137,11 @@ def userInbox(request):
     context = {'messageRequests' : messageRequests, 'messageCount' : messageCount}
     return render(request, 'users/inbox.html', context)
 
-def userMessage(request):
-    context = {}
+@login_required(login_url='login-register')
+def userMessage(request, pk):
+    profile = request.user.profile
+    message = profile.messages.get(id=pk)
+    context = {'message' : message}
     return render(request, 'users/message.html', context)
     
 
