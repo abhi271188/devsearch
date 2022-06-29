@@ -143,5 +143,10 @@ def userMessage(request, pk):
     message = profile.messages.get(id=pk)
     context = {'message' : message}
     return render(request, 'users/message.html', context)
+
+@login_required(login_url='login-register')
+def createMessage(request):
+    context = {}
+    return render(request, 'users/create-message.html', context)
     
 
