@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm
-from .forms import customUserCreationForm, ProfileForm, SkillForm
+from .forms import customUserCreationForm, ProfileForm, SkillForm, MessageForm
 from django.db.models import Q
 from .utils import paginateProfiles, searchProfiles
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -134,6 +134,7 @@ def userInbox(request):
     profile = request.user.profile
     messageRequests = profile.messages.all()
     messageCount = messageRequests.filter(is_read = False).count()
+
     context = {'messageRequests' : messageRequests, 'messageCount' : messageCount}
     return render(request, 'users/inbox.html', context)
 
@@ -141,12 +142,16 @@ def userInbox(request):
 def userMessage(request, pk):
     profile = request.user.profile
     message = profile.messages.get(id=pk)
+    if message.is_read == False:
+        message.is_read = True
+        message.save()
+
     context = {'message' : message}
     return render(request, 'users/message.html', context)
 
-@login_required(login_url='login-register')
-def createMessage(request):
-    context = {}
+def createMessage(request, pk):
+    messageForm = MessageForm()
+    context = {'messageForm' : messageForm}
     return render(request, 'users/create-message.html', context)
     
 

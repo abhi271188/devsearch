@@ -53,7 +53,9 @@
                 </li>
                 {% endif %}
               </ul>
-              <a href="{% url 'create-message' %}" class="btn btn--sub btn--lg"
+              <a
+                href="{% url 'create-message' profile.id %}"
+                class="btn btn--sub btn--lg"
                 >Send Message
               </a>
             </div>
