@@ -1,3 +1,4 @@
+from email import message
 from multiprocessing import context
 from django.shortcuts import redirect, render
 from .models import Profile, Skill, Message
@@ -150,8 +151,25 @@ def userMessage(request, pk):
     return render(request, 'users/message.html', context)
 
 def createMessage(request, pk):
+    recipient = Profile.objects.get(id=pk)
     messageForm = MessageForm()
-    context = {'messageForm' : messageForm}
+    try:
+        sender = request.user.profile
+    except:
+        sender = None
+    if request.method == 'POST':
+        messageForm = MessageForm(request.POST)
+        if messageForm.is_valid():
+            messageImage = messageForm.save(commit=False)
+            messageForm.sender = sender
+            messageForm.recipient = recipient
+            messageForm.save()
+            return redirect('profile', recipient.id)
+
+            if sender:
+                
+
+    context = {'messageForm' : messageForm, 'recipient' : recipient}
     return render(request, 'users/create-message.html', context)
     
 
