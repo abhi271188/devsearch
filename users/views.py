@@ -161,13 +161,13 @@ def createMessage(request, pk):
         messageForm = MessageForm(request.POST)
         if messageForm.is_valid():
             messageImage = messageForm.save(commit=False)
-            messageForm.sender = sender
-            messageForm.recipient = recipient
-            messageForm.save()
+            messageImage.sender = sender
+            messageImage.recipient = recipient
+            if(sender):
+                messageImage.name = sender.name
+                messageImage.email = sender.email
+            messageImage.save()
             return redirect('profile', recipient.id)
-
-            if sender:
-                
 
     context = {'messageForm' : messageForm, 'recipient' : recipient}
     return render(request, 'users/create-message.html', context)
