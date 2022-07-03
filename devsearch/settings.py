@@ -109,7 +109,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'cse.6201@gmail.com'
-EMAIL_HOST_PASSWORD = '123@abhina'
+EMAIL_HOST_PASSWORD = 'hexkutzcjonrxeww'
 
 
 # Static files (CSS, JavaScript, Images)
