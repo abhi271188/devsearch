@@ -44,41 +44,41 @@
     </div>
   </div>
 </div>
+
 {% else %}
-<body>
-  <div class="auth">
-    <div class="card">
-      <div class="auth__header text-center">
-        <a href="/">
-          <img src="{% static 'images/icon.svg' %}" alt="icon" />
-        </a>
-        <h3>Register an Account</h3>
-        <p>Create a new developer account</p>
-      </div>
-      <form method="post" action="#" class="form auth__form">
-        {% csrf_token %} {% for field in form %}
-        <div class="form__field">
-          <label for="formInput#text">{{field.label}}</label>
-          {{field}}
-          <!--
+
+<div class="auth">
+  <div class="card">
+    <div class="auth__header text-center">
+      <a href="/">
+        <img src="{% static 'images/icon.svg' %}" alt="icon" />
+      </a>
+      <h3>Register an Account</h3>
+      <p>Create a new developer account</p>
+    </div>
+    <form method="post" action="#" class="form auth__form">
+      {% csrf_token %} {% for field in form %}
+      <div class="form__field">
+        <label for="formInput#text">{{field.label}}</label>
+        {{field}}
+        <!--
                   {% if field.help_text %}
                   <small>{{field.help_text}}</small>
                 {% endif %}
                 -->
-          {% for error in field.errors %}
-          <p style="color: red">{{error}}</p>
-          {% endfor %}
-        </div>
+        {% for error in field.errors %}
+        <p style="color: red">{{error}}</p>
         {% endfor %}
-        <div class="auth__actions">
-          <input class="btn btn--sub btn--lg" type="submit" value="Sign  In" />
-        </div>
-      </form>
-      <div class="auth__alternative">
-        <p>Already have an Account?</p>
-        <a href="{% url 'login-register' %}">Log In</a>
       </div>
+      {% endfor %}
+      <div class="auth__actions">
+        <input class="btn btn--sub btn--lg" type="submit" value="Sign  In" />
+      </div>
+    </form>
+    <div class="auth__alternative">
+      <p>Already have an Account?</p>
+      <a href="{% url 'login-register' %}">Log In</a>
     </div>
   </div>
-</body>
+</div>
 {% endif %} {% endblock content %}
