@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('projects/', include('projects.urls')),
     path('', include('users.urls')),
+    path('api/', include('api.urls')),
 
     # set the urls for Password Reset with the class based views
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'), 
