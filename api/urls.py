@@ -3,4 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.getRoutes),
+    path('projects/', views.getprojects),
+    path('project/<str:pk>/', views.getProject),
 ]
